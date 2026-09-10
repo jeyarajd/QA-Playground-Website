@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Frame content</title>
+<style>
+  body{font-family:'General Sans','Inter',sans-serif;margin:0;padding:20px;background:#f7f8f6;color:#14201a;}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  input{width:100%;padding:8px 10px;border:1px solid #d4d8d0;border-radius:6px;font-size:14px;box-sizing:border-box;margin-bottom:10px;}
+  button{background:#0e7c5f;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:14px;cursor:pointer;}
+  p{font-size:13px;color:#5b665f;}
+  #result{margin-top:10px;font-size:13px;font-weight:600;color:#0e7c5f;}
+</style>
+</head>
+<body>
+  <p>This form lives inside a same-origin <code>&lt;iframe&gt;</code>.</p>
+  <label for="frame-name">Your name</label>
+  <input type="text" id="frame-name" data-testid="input-frame-name" placeholder="Type here" />
+  <button id="frame-submit" data-testid="button-frame-submit" type="button">Say hello</button>
+  <div id="result" data-testid="text-frame-result"></div>
+  <script>
+    document.getElementById('frame-submit').addEventListener('click', function () {
+      var name = document.getElementById('frame-name').value.trim() || 'stranger';
+      document.getElementById('result').textContent = 'Hello, ' + name + ' — from inside the iframe.';
+    });
+  </script>
+</body>
+</html>

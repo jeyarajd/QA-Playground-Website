@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QA Playground — Home | Playwright Practice Sandbox</title>
+<meta name="description" content="A self-contained sandbox of forms, tables, frames, dialogs, dynamic content, drag-and-drop, and tricky locators for practicing Playwright and Selenium automation." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 00</div>
+      <h1 class="page-title">A sandbox built to be automated</h1>
+      <p class="page-desc">
+        Eleven small modules, each isolating one class of UI behavior — inputs, tables, frames,
+        dialogs, timing, drag-and-drop, and deliberately tricky locators. Point Playwright,
+        Selenium, or Robot Framework at it and practice writing resilient locators and
+        assertions against real edge cases, not idealized markup.
+      </p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">How this is organized</h2>
+      <p class="module-note">
+        Every control on every page carries a <code>data-testid</code> where a real app would have one —
+        and several controls deliberately omit them, duplicate them, or hide them, so you get practice
+        writing locators by role, text, and structure instead of only by test id. Badges next to each
+        control call out exactly what edge case it demonstrates.
+      </p>
+      <div class="row">
+        <span class="badge tone-success">stable</span>
+        <span class="badge tone-warning">timing-sensitive</span>
+        <span class="badge tone-error">ambiguous locator</span>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Modules at a glance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Module</th><th>Covers</th><th>Key edge cases</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="forms.html">01 Forms &amp; Inputs</a></td><td>text, textarea, radio, checkbox, select</td><td>validation, disabled, readonly, indeterminate, multi-select</td></tr>
+            <tr><td><a href="buttons.html">02 Buttons &amp; Actions</a></td><td>buttons, links, context menu</td><td>disabled, delayed-enable, double-click, right-click, duplicate labels</td></tr>
+            <tr><td><a href="tables.html">03 Tables</a></td><td>static &amp; dynamic tables</td><td>sorting, filtering, pagination, row add/remove</td></tr>
+            <tr><td><a href="frames.html">04 Frames &amp; iFrames</a></td><td>iframes</td><td>nested frames, same-origin, lazily-loaded frame</td></tr>
+            <tr><td><a href="dialogs.html">05 Dialogs &amp; Modals</a></td><td>native + custom dialogs</td><td>alert/confirm/prompt, focus trap, tooltip, toast</td></tr>
+            <tr><td><a href="dynamic.html">06 Dynamic Content</a></td><td>timing &amp; state changes</td><td>delayed render, polling, moving target, stale element, overlay</td></tr>
+            <tr><td><a href="dragdrop.html">07 Drag, Drop &amp; Upload</a></td><td>HTML5 DnD, files, sliders</td><td>reorder, cross-list drag, file input, drag-drop upload, download</td></tr>
+            <tr><td><a href="windows.html">08 Windows &amp; Tabs</a></td><td>multi-window flows</td><td>new tab, new window, opener messaging</td></tr>
+            <tr><td><a href="locators.html">09 Tricky Locators</a></td><td>ambiguous markup</td><td>duplicate ids, hidden twins, dynamic ids, shadow DOM</td></tr>
+            <tr><td><a href="autosuggest.html">10 Autocomplete &amp; Pickers</a></td><td>typeahead, datalist, tags, date</td><td>keyboard nav, async suggestions, multi-value input</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Running it</h2>
+      <p class="module-note">
+        This is a static site — no build step, no backend. Open <code>index.html</code> directly in a
+        browser, or serve the folder locally (<code>npx serve .</code> or Python's
+        <code>python -m http.server</code>) and point your automation base URL at it. Every interactive
+        element is native HTML wherever possible, so the same locators you'd use against a real product
+        apply here.
+      </p>
+    </section>
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

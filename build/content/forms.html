@@ -1,0 +1,157 @@
+    <form id="practice-form" novalidate>
+      <section class="module">
+        <h2 class="module-title">Text &amp; textarea <span class="badge tone-success">stable</span></h2>
+        <p class="module-note">Standard labelled inputs, plus a few that are deliberately awkward: no visible label, autofocus, readonly, and disabled.</p>
+        <div class="stack">
+          <div class="grid-2">
+            <div class="field">
+              <label for="full-name">Full name <span aria-hidden="true">*</span></label>
+              <input type="text" id="full-name" name="fullName" data-testid="input-full-name" required minlength="2" maxlength="60" placeholder="Ada Lovelace" autocomplete="name" />
+              <span class="error-msg">Enter at least 2 characters.</span>
+            </div>
+            <div class="field">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" data-testid="input-email" required placeholder="you@example.com" autocomplete="email" />
+              <span class="error-msg">Enter a valid email address.</span>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="phone">Phone (optional, pattern-constrained)</label>
+              <input type="tel" id="phone" name="phone" data-testid="input-phone" pattern="^\+?[0-9\-\s]{7,15}$" placeholder="+1 555 0100" />
+              <span class="hint">Digits, spaces, dashes, optional leading +.</span>
+            </div>
+            <div class="field">
+              <label for="website">Website (readonly, prefilled) <span class="badge">readonly</span></label>
+              <input type="url" id="website" name="website" data-testid="input-website" value="https://example.com/profile" readonly />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="ghost-search">No visible label — locate by placeholder/role <span class="badge tone-error">no label</span></label>
+              <input type="search" id="ghost-search" name="ghostSearch" data-testid="input-ghost-search" placeholder="Search without a &lt;label&gt;…" aria-label="Search without a label" />
+            </div>
+            <div class="field">
+              <label for="locked-field">Locked field <span class="badge">disabled</span></label>
+              <input type="text" id="locked-field" name="lockedField" data-testid="input-locked" value="Cannot be edited" disabled />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="bio">Bio <span class="badge">character counter</span></label>
+            <textarea id="bio" name="bio" data-testid="textarea-bio" maxlength="240" rows="4" placeholder="Tell us something…"></textarea>
+            <span class="hint"><span id="bio-count">0</span>/240 characters</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="module">
+        <h2 class="module-title">Number, range &amp; date types <span class="badge">native input types</span></h2>
+        <p class="module-note">Browser-native controls that behave differently across engines — good practice for type-specific fill strategies.</p>
+        <div class="grid-2">
+          <div class="field">
+            <label for="quantity">Quantity (1–10)</label>
+            <input type="number" id="quantity" name="quantity" data-testid="input-quantity" min="1" max="10" step="1" value="1" />
+          </div>
+          <div class="field">
+            <label for="birthdate">Birth date</label>
+            <input type="date" id="birthdate" name="birthdate" data-testid="input-birthdate" />
+          </div>
+          <div class="field">
+            <label for="volume">Volume</label>
+            <input type="range" id="volume" name="volume" data-testid="input-volume" min="0" max="100" value="40" oninput="document.getElementById('volume-val').textContent=this.value" />
+            <span class="hint">Value: <span id="volume-val" data-testid="text-volume-value">40</span></span>
+          </div>
+          <div class="field">
+            <label for="favcolor">Favorite color</label>
+            <input type="color" id="favcolor" name="favcolor" data-testid="input-color" value="#0e7c5f" />
+          </div>
+        </div>
+      </section>
+
+      <section class="module">
+        <h2 class="module-title">Radio group <span class="badge">disabled option</span></h2>
+        <p class="module-note">One option is pre-selected, one is disabled and cannot be chosen — verify your automation asserts state rather than assuming it can select it.</p>
+        <fieldset>
+          <legend>Payment method</legend>
+          <div class="choice-row">
+            <input type="radio" id="pay-card" name="payment" value="card" data-testid="radio-payment-card" checked />
+            <label for="pay-card">Credit card</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="pay-paypal" name="payment" value="paypal" data-testid="radio-payment-paypal" />
+            <label for="pay-paypal">PayPal</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="pay-bank" name="payment" value="bank" data-testid="radio-payment-bank" disabled />
+            <label for="pay-bank">Bank transfer <span class="badge">disabled</span></label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="module">
+        <h2 class="module-title">Checkboxes <span class="badge">indeterminate state</span></h2>
+        <p class="module-note">The "select all" checkbox reflects an indeterminate state when only some children are checked — a state that's easy to miss with a plain <code>checked</code> assertion.</p>
+        <fieldset>
+          <legend>Notification channels</legend>
+          <div class="choice-row">
+            <input type="checkbox" id="select-all" data-testid="checkbox-select-all" />
+            <label for="select-all"><strong>Select all</strong></label>
+          </div>
+          <div class="choice-row" style="padding-left:1.75rem">
+            <input type="checkbox" class="channel-cb" id="chan-email" data-testid="checkbox-channel-email" checked />
+            <label for="chan-email">Email</label>
+          </div>
+          <div class="choice-row" style="padding-left:1.75rem">
+            <input type="checkbox" class="channel-cb" id="chan-sms" data-testid="checkbox-channel-sms" />
+            <label for="chan-sms">SMS</label>
+          </div>
+          <div class="choice-row" style="padding-left:1.75rem">
+            <input type="checkbox" class="channel-cb" id="chan-push" data-testid="checkbox-channel-push" />
+            <label for="chan-push">Push</label>
+          </div>
+          <div class="choice-row mt-4">
+            <input type="checkbox" id="terms" name="terms" data-testid="checkbox-terms" required />
+            <label for="terms">I agree to the terms <span aria-hidden="true">*</span></label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="module">
+        <h2 class="module-title">Select &amp; multi-select</h2>
+        <div class="grid-2">
+          <div class="field">
+            <label for="country">Country</label>
+            <select id="country" name="country" data-testid="select-country">
+              <option value="">Choose a country…</option>
+              <option value="in">India</option>
+              <option value="us">United States</option>
+              <option value="gb">United Kingdom</option>
+              <option value="de">Germany</option>
+              <option value="jp">Japan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skills">Skills (multi-select, ctrl/cmd-click) <span class="badge">multi-select</span></label>
+            <select id="skills" name="skills" data-testid="select-skills" multiple size="5">
+              <option value="playwright">Playwright</option>
+              <option value="selenium">Selenium</option>
+              <option value="robot">Robot Framework</option>
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="module">
+        <div class="row">
+          <button type="submit" class="btn btn-primary" data-testid="button-submit-form">Submit form</button>
+          <button type="reset" class="btn btn-secondary" data-testid="button-reset-form">Reset</button>
+        </div>
+        <p class="hint mt-4">Submitting runs native HTML5 validation first — required/invalid fields get <code>.invalid</code> and an inline error message.</p>
+        <div class="console mt-4" id="form-output" data-testid="text-form-output" aria-live="polite">Submit the form to see the collected values here.</div>
+      </section>
+    </form>

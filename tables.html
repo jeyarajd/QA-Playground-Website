@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tables | QA Playground</title>
+<meta name="description" content="Static, sortable, filterable, paginated, and dynamically-editable tables." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 03</div>
+      <h1 class="page-title">Tables</h1>
+      <p class="page-desc">A static reference table, a sortable/filterable dataset, a table you can add and remove rows from, and pagination — the four shapes of table you'll meet in real products.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Static reference table <span class="badge tone-success">stable</span></h2>
+      <p class="module-note">No interactivity — good for practicing row/cell locators by text and position.</p>
+      <div class="table-wrap">
+        <table data-testid="table-static">
+          <thead>
+            <tr><th>Tool</th><th>Language</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Playwright</td><td>TS / JS / Python / Java / .NET</td><td>Browser automation</td></tr>
+            <tr><td>Selenium</td><td>Java / Python / C# / JS</td><td>Browser automation</td></tr>
+            <tr><td>Robot Framework</td><td>Python (keyword-driven)</td><td>Acceptance testing</td></tr>
+            <tr><td>Cypress</td><td>JS / TS</td><td>Browser automation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Sortable &amp; filterable dataset</h2>
+      <p class="module-note">Click a column header to sort; the arrow and <code>aria-sort</code> attribute reflect direction. Filter narrows rows by name.</p>
+      <div class="field" style="max-width:280px;margin-bottom:var(--space-4)">
+        <label for="table-filter">Filter by name</label>
+        <input type="text" id="table-filter" data-testid="input-table-filter" placeholder="e.g. Priya" />
+      </div>
+      <div class="table-wrap">
+        <table data-testid="table-sortable">
+          <thead>
+            <tr>
+              <th data-sort="name" data-testid="th-sort-name" aria-sort="none">Name <span class="sort-arrow"></span></th>
+              <th data-sort="role" data-testid="th-sort-role" aria-sort="none">Role <span class="sort-arrow"></span></th>
+              <th data-sort="score" data-testid="th-sort-score" aria-sort="none">Score <span class="sort-arrow"></span></th>
+            </tr>
+          </thead>
+          <tbody id="sortable-tbody"></tbody>
+        </table>
+      </div>
+      <p class="hint mt-4" id="sortable-empty" style="display:none">No rows match that filter.</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Editable table <span class="badge">add / remove rows</span></h2>
+      <p class="module-note">Add rows through the form below; each row's own "Delete" button removes just that row — practice targeting a row by its data.</p>
+      <div class="row" style="align-items:flex-end;margin-bottom:var(--space-4)">
+        <div class="field" style="max-width:220px">
+          <label for="new-task-name">Task</label>
+          <input type="text" id="new-task-name" data-testid="input-new-task" placeholder="Write test plan" />
+        </div>
+        <div class="field" style="max-width:180px">
+          <label for="new-task-owner">Owner</label>
+          <input type="text" id="new-task-owner" data-testid="input-new-owner" placeholder="Jeyaraj" />
+        </div>
+        <button class="btn btn-primary" id="add-row-btn" data-testid="button-add-row">Add row</button>
+      </div>
+      <div class="table-wrap">
+        <table data-testid="table-editable">
+          <thead>
+            <tr><th>Task</th><th>Owner</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="editable-tbody">
+            <tr data-testid="row-task">
+              <td>Set up CI pipeline</td><td>Jeyaraj</td><td><span class="badge tone-success">done</span></td>
+              <td><button class="btn btn-ghost delete-row-btn" data-testid="button-delete-row">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint mt-4" id="editable-empty" style="display:none">No tasks left.</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Pagination</h2>
+      <p class="module-note">23 records, 5 per page. The active page button carries <code>aria-current="true"</code>.</p>
+      <div class="table-wrap">
+        <table data-testid="table-paginated">
+          <thead><tr><th>#</th><th>Ticket</th><th>Priority</th></tr></thead>
+          <tbody id="paginated-tbody"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" id="pagination-nav" data-testid="pagination-nav" aria-label="Table pages"></nav>
+    </section>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/tables.js"></script>
+</body>
+</html>

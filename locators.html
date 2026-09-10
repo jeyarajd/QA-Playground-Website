@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tricky Locators | QA Playground</title>
+<meta name="description" content="Duplicate ids, hidden twins, dynamically-changing ids and classes, and a shadow DOM component." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 09</div>
+      <h1 class="page-title">Tricky locators</h1>
+      <p class="page-desc">Markup you'll actually meet in the wild: duplicate ids and classes, a visible/hidden pair with identical text, ids and classes that regenerate on every render, and a real shadow DOM component that normal CSS selectors can't pierce.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Duplicate <code>id</code> attributes <span class="badge tone-error">invalid but real</span></h2>
+      <p class="module-note">Two elements share the literal id <code>dup-id</code> — invalid HTML that browsers render anyway. <code>document.getElementById</code> and <code>#dup-id</code> only ever reach the first one.</p>
+      <div class="row">
+        <span class="badge" id="dup-id" data-testid="dup-id-first">First element with id="dup-id"</span>
+        <span class="badge" id="dup-id" data-testid="dup-id-second">Second element with id="dup-id"</span>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Identical text, repeated structure <span class="badge tone-error">ambiguous locator</span></h2>
+      <p class="module-note">Three rows with an identical "View" action — a text locator alone matches all three; scope by row.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Order</th><th>Customer</th><th></th></tr></thead>
+          <tbody>
+            <tr data-testid="row-order" data-order="1042"><td>#1042</td><td>Meera Nair</td><td><button class="btn btn-ghost view-btn" data-testid="button-view">View</button></td></tr>
+            <tr data-testid="row-order" data-order="1043"><td>#1043</td><td>Arjun Rao</td><td><button class="btn btn-ghost view-btn" data-testid="button-view">View</button></td></tr>
+            <tr data-testid="row-order" data-order="1044"><td>#1044</td><td>Divya Shah</td><td><button class="btn btn-ghost view-btn" data-testid="button-view">View</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="console mt-4" id="view-output" data-testid="text-view-output"></div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Visible / hidden twins <span class="badge tone-error">ambiguous locator</span></h2>
+      <p class="module-note">Two elements with exactly the same text — one rendered, one not. A locator must also assert visibility, not just presence.</p>
+      <div class="stack">
+        <p data-testid="twin-visible">Account status: Active</p>
+        <p data-testid="twin-hidden" style="display:none">Account status: Active</p>
+        <p data-testid="twin-offscreen" class="offscreen-el">Account status: Active</p>
+        <p data-testid="twin-zero-opacity" class="zero-opacity">Account status: Active</p>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Ids and classes that regenerate <span class="badge tone-warning">unstable attributes</span></h2>
+      <p class="module-note">This button's <code>id</code> and <code>class</code> change to a new random value every 2 seconds, mimicking hashed class names from a component framework. Only <code>data-testid</code> and its visible text stay stable.</p>
+      <button class="btn btn-secondary" id="regen-btn" data-testid="button-stable-target">Stable text, unstable attributes</button>
+      <p class="hint mt-4">Current id: <code id="regen-id-display" data-testid="text-current-id"></code></p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Shadow DOM component <span class="badge tone-error">needs piercing</span></h2>
+      <p class="module-note">The button below lives inside a real <code>open</code> shadow root attached to a custom element — a plain <code>document.querySelector</code> from outside can't see it. Playwright's engine pierces open shadow roots automatically for standard selectors.</p>
+      <qa-shadow-widget data-testid="shadow-widget"></qa-shadow-widget>
+      <div class="console mt-4" id="shadow-output" data-testid="text-shadow-output"></div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Whitespace &amp; special characters in text</h2>
+      <p class="module-note">Real content is never as clean as "Submit" — practice matching text that has line breaks, repeated spaces, and non-ASCII characters.</p>
+      <div class="stack">
+        <button class="btn btn-secondary" data-testid="button-whitespace">   Submit   
+          order   </button>
+        <span class="badge" data-testid="text-unicode">Café — 100% naïve test • 会员</span>
+      </div>
+    </section>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/locators.js"></script>
+</body>
+</html>

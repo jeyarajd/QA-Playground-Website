@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dynamic Content | QA Playground</title>
+<meta name="description" content="Delayed rendering, polling counters, moving targets, disappearing elements, and covered elements." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 06</div>
+      <h1 class="page-title">Dynamic content</h1>
+      <p class="page-desc">Timing is where automation breaks. Elements here appear late, move around, get replaced with fresh DOM nodes, or start out covered by an overlay — practice waiting on the right condition instead of a fixed sleep.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Delayed render <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">Nothing is in the DOM for 2.5 seconds after page load — wait for the element to appear rather than sleeping a fixed time.</p>
+      <div id="delayed-render-slot" class="console" data-testid="text-delayed-render">Waiting…</div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Polling counter</h2>
+      <p class="module-note">Ticks up once per second forever — useful for practicing "wait until value is at least N" assertions.</p>
+      <div class="console" id="poll-counter" data-testid="text-poll-counter">0</div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Moving target <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">Slides in from the side on a CSS transition when it appears — clicking before the animation settles can miss. Playwright's actionability checks (stable + not animating) handle this automatically; a raw coordinate click would not.</p>
+      <div class="row" style="min-height:52px">
+        <button class="btn btn-secondary" id="show-moving-btn" data-testid="button-show-moving">Show moving button</button>
+        <button class="btn btn-primary hidden-el" id="moving-target" data-testid="button-moving-target" style="transition:transform 700ms cubic-bezier(.16,1,.3,1); transform: translateX(-40px); opacity:0;">Catch me</button>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Stale element replacement <span class="badge tone-error">ambiguous locator</span></h2>
+      <p class="module-note">Clicking swaps this button for a brand-new DOM node with the same text — a cached element handle from before the click goes stale, mirroring a framework re-render.</p>
+      <div id="stale-slot" data-testid="stale-slot"></div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Element covered by an overlay</h2>
+      <p class="module-note">The button underneath is only clickable once the overlay finishes and is removed after 2 seconds — actionability checks should block a click while it's covered.</p>
+      <div class="covered-wrap card" style="padding:var(--space-8);text-align:center">
+        <button class="btn btn-primary" id="covered-btn" data-testid="button-covered">Confirm order</button>
+        <div class="cover-layer" id="cover-layer" data-testid="overlay-loading">Loading…</div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Disappearing element</h2>
+      <p class="module-note">Visible for 3 seconds after you click, then removed from the DOM — practice waiting for detachment.</p>
+      <button class="btn btn-secondary" id="show-vanish-btn" data-testid="button-show-vanishing">Show banner</button>
+      <div class="mt-4" id="vanish-slot"></div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Progress bar</h2>
+      <button class="btn btn-secondary" id="start-progress-btn" data-testid="button-start-progress">Start task</button>
+      <div class="progress-track mt-4" data-testid="progress-track">
+        <div class="progress-fill" id="progress-fill" data-testid="progress-fill"></div>
+      </div>
+      <p class="hint mt-4" id="progress-label" data-testid="text-progress-label">0%</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Infinite scroll</h2>
+      <p class="module-note">Scroll to the bottom of the box to load 10 more rows, up to 50.</p>
+      <div class="table-wrap" id="scroll-box" data-testid="infinite-scroll-box" style="max-height:220px;overflow-y:auto">
+        <table>
+          <tbody id="scroll-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/dynamic.js"></script>
+</body>
+</html>

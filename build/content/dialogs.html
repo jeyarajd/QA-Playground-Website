@@ -1,0 +1,42 @@
+    <section class="module">
+      <h2 class="module-title">Native browser dialogs <span class="badge tone-warning">requires dialog handler</span></h2>
+      <p class="module-note">These are OS-level dialogs, not DOM nodes — handle them via your framework's dialog event (e.g. Playwright's <code>page.on('dialog', ...)</code>) instead of a locator.</p>
+      <div class="row">
+        <button class="btn btn-secondary" id="alert-btn" data-testid="button-alert">Trigger alert()</button>
+        <button class="btn btn-secondary" id="confirm-btn" data-testid="button-confirm">Trigger confirm()</button>
+        <button class="btn btn-secondary" id="prompt-btn" data-testid="button-prompt">Trigger prompt()</button>
+      </div>
+      <div class="console mt-4" id="dialog-output" data-testid="text-dialog-output" aria-live="polite">No dialog result yet.</div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Custom modal with focus trap</h2>
+      <p class="module-note">A real DOM dialog: focus moves inside on open, Escape and the overlay close it, and focus returns to the trigger button on close.</p>
+      <button class="btn btn-primary" id="open-modal-btn" data-testid="button-open-modal">Open modal</button>
+    </section>
+
+    <div class="modal-overlay" id="modal-overlay" data-testid="modal-overlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-box">
+        <h3 class="modal-title" id="modal-title">Delete this record?</h3>
+        <p class="text-muted" style="font-size:var(--text-sm)">This action can't be undone. Confirming just resets this demo.</p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="modal-cancel-btn" data-testid="button-modal-cancel">Cancel</button>
+          <button class="btn btn-primary" id="modal-confirm-btn" data-testid="button-modal-confirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="module">
+      <h2 class="module-title">Tooltip on hover / focus</h2>
+      <p class="module-note">Appears on both mouse hover and keyboard focus — check <code>:hover</code> and <code>:focus-within</code> paths separately.</p>
+      <span class="has-tooltip">
+        <button class="btn btn-secondary" data-testid="button-tooltip-trigger" aria-describedby="tooltip-1">Hover or focus me</button>
+        <span class="tooltip-bubble" role="tooltip" id="tooltip-1" data-testid="tooltip-bubble">Extra context shown on hover</span>
+      </span>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Toast notification</h2>
+      <p class="module-note">Appears bottom-right and auto-dismisses after 2.5s — assert on it before it disappears.</p>
+      <button class="btn btn-secondary" id="toast-btn" data-testid="button-show-toast">Show toast</button>
+    </section>

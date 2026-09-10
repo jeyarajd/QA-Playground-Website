@@ -1,0 +1,81 @@
+    <section class="module">
+      <h2 class="module-title">Static reference table <span class="badge tone-success">stable</span></h2>
+      <p class="module-note">No interactivity — good for practicing row/cell locators by text and position.</p>
+      <div class="table-wrap">
+        <table data-testid="table-static">
+          <thead>
+            <tr><th>Tool</th><th>Language</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Playwright</td><td>TS / JS / Python / Java / .NET</td><td>Browser automation</td></tr>
+            <tr><td>Selenium</td><td>Java / Python / C# / JS</td><td>Browser automation</td></tr>
+            <tr><td>Robot Framework</td><td>Python (keyword-driven)</td><td>Acceptance testing</td></tr>
+            <tr><td>Cypress</td><td>JS / TS</td><td>Browser automation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Sortable &amp; filterable dataset</h2>
+      <p class="module-note">Click a column header to sort; the arrow and <code>aria-sort</code> attribute reflect direction. Filter narrows rows by name.</p>
+      <div class="field" style="max-width:280px;margin-bottom:var(--space-4)">
+        <label for="table-filter">Filter by name</label>
+        <input type="text" id="table-filter" data-testid="input-table-filter" placeholder="e.g. Priya" />
+      </div>
+      <div class="table-wrap">
+        <table data-testid="table-sortable">
+          <thead>
+            <tr>
+              <th data-sort="name" data-testid="th-sort-name" aria-sort="none">Name <span class="sort-arrow"></span></th>
+              <th data-sort="role" data-testid="th-sort-role" aria-sort="none">Role <span class="sort-arrow"></span></th>
+              <th data-sort="score" data-testid="th-sort-score" aria-sort="none">Score <span class="sort-arrow"></span></th>
+            </tr>
+          </thead>
+          <tbody id="sortable-tbody"></tbody>
+        </table>
+      </div>
+      <p class="hint mt-4" id="sortable-empty" style="display:none">No rows match that filter.</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Editable table <span class="badge">add / remove rows</span></h2>
+      <p class="module-note">Add rows through the form below; each row's own "Delete" button removes just that row — practice targeting a row by its data.</p>
+      <div class="row" style="align-items:flex-end;margin-bottom:var(--space-4)">
+        <div class="field" style="max-width:220px">
+          <label for="new-task-name">Task</label>
+          <input type="text" id="new-task-name" data-testid="input-new-task" placeholder="Write test plan" />
+        </div>
+        <div class="field" style="max-width:180px">
+          <label for="new-task-owner">Owner</label>
+          <input type="text" id="new-task-owner" data-testid="input-new-owner" placeholder="Jeyaraj" />
+        </div>
+        <button class="btn btn-primary" id="add-row-btn" data-testid="button-add-row">Add row</button>
+      </div>
+      <div class="table-wrap">
+        <table data-testid="table-editable">
+          <thead>
+            <tr><th>Task</th><th>Owner</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="editable-tbody">
+            <tr data-testid="row-task">
+              <td>Set up CI pipeline</td><td>Jeyaraj</td><td><span class="badge tone-success">done</span></td>
+              <td><button class="btn btn-ghost delete-row-btn" data-testid="button-delete-row">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint mt-4" id="editable-empty" style="display:none">No tasks left.</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Pagination</h2>
+      <p class="module-note">23 records, 5 per page. The active page button carries <code>aria-current="true"</code>.</p>
+      <div class="table-wrap">
+        <table data-testid="table-paginated">
+          <thead><tr><th>#</th><th>Ticket</th><th>Priority</th></tr></thead>
+          <tbody id="paginated-tbody"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" id="pagination-nav" data-testid="pagination-nav" aria-label="Table pages"></nav>
+    </section>

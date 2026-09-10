@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Popup window</title>
+<style>
+  body{font-family:'General Sans','Inter',sans-serif;margin:0;padding:24px;background:#0d1310;color:#dde6df;}
+  h1{font-size:16px;margin-bottom:12px;}
+  p{font-size:13px;color:#8b9891;margin-bottom:16px;}
+  button{background:#3ddc9a;color:#0d1310;border:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;}
+</style>
+</head>
+<body>
+  <h1>I'm a popup window</h1>
+  <p>Opened via <code>window.open()</code>. Clicking below posts a message back to the window that opened me, then closes.</p>
+  <button id="send-back-btn" data-testid="button-send-back" type="button">Send message back &amp; close</button>
+  <script>
+    document.getElementById('send-back-btn').addEventListener('click', function () {
+      if (window.opener) {
+        window.opener.postMessage({ source: 'qa-playground-popup', text: 'Hello from the popup window!' }, '*');
+      }
+      window.close();
+    });
+  </script>
+</body>
+</html>

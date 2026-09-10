@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Drag, Drop & Upload | QA Playground</title>
+<meta name="description" content="HTML5 drag-and-drop reordering, cross-list drag, sliders, file upload, and file download." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 07</div>
+      <h1 class="page-title">Drag, drop &amp; upload</h1>
+      <p class="page-desc">Native HTML5 drag-and-drop for reordering and moving items between lists, a range slider, a file input with drag-and-drop upload, and a generated file download.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Reorder within a list</h2>
+      <p class="module-note">Native HTML5 drag-and-drop — no library. Drag items to change their order.</p>
+      <ul class="dnd-list" id="reorder-list" data-testid="list-reorder" style="max-width:360px">
+        <li class="dnd-item" draggable="true" data-testid="dnd-item" data-id="1">Write test plan</li>
+        <li class="dnd-item" draggable="true" data-testid="dnd-item" data-id="2">Set up fixtures</li>
+        <li class="dnd-item" draggable="true" data-testid="dnd-item" data-id="3">Automate happy path</li>
+        <li class="dnd-item" draggable="true" data-testid="dnd-item" data-id="4">Automate edge cases</li>
+      </ul>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Drag between lists</h2>
+      <p class="module-note">Drag cards from "Backlog" into "Done" and back.</p>
+      <div class="dnd-columns">
+        <div>
+          <h3 style="font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-2)">Backlog</h3>
+          <ul class="dnd-list" id="list-backlog" data-testid="list-backlog">
+            <li class="dnd-item" draggable="true" data-testid="dnd-card" data-id="a">Investigate flaky test</li>
+            <li class="dnd-item" draggable="true" data-testid="dnd-card" data-id="b">Add visual regression check</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-2)">Done</h3>
+          <ul class="dnd-list" id="list-done" data-testid="list-done">
+            <li class="dnd-item" draggable="true" data-testid="dnd-card" data-id="c">Set up CI pipeline</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">File upload</h2>
+      <p class="module-note">A real <code>&lt;input type="file"&gt;</code> that also accepts drag-and-drop from the OS file explorer — automation should use <code>setInputFiles</code> against the input rather than simulating the drop.</p>
+      <input type="file" id="file-input" data-testid="input-file" class="sr-only" multiple />
+      <label for="file-input" class="dropzone" id="dropzone" data-testid="dropzone" style="cursor:pointer;display:block">
+        Drop files here, or click to browse
+      </label>
+      <ul class="stack mt-4" id="file-list" data-testid="file-list" style="list-style:none;font-size:var(--text-sm)"></ul>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">File download</h2>
+      <p class="module-note">Generates a text file client-side and downloads it — a good target for a download-event assertion.</p>
+      <button class="btn btn-primary" id="download-btn" data-testid="button-download">Download sample-report.txt</button>
+    </section>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/dragdrop.js"></script>
+</body>
+</html>

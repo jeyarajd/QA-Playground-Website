@@ -1,0 +1,50 @@
+    <section class="module">
+      <h2 class="module-title">Typeahead search <span class="badge tone-warning">async-feeling</span></h2>
+      <p class="module-note">Suggestions are filtered after a simulated 300ms network delay and support full keyboard navigation (<kbd>↑</kbd>/<kbd>↓</kbd> to move, <kbd>Enter</kbd> to select, <kbd>Esc</kbd> to close).</p>
+      <div class="field autosuggest" style="max-width:340px">
+        <label for="typeahead-input">Search a testing tool</label>
+        <input type="text" id="typeahead-input" data-testid="input-typeahead" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="typeahead-list" placeholder="Start typing…" />
+        <ul class="suggest-list" id="typeahead-list" data-testid="list-typeahead" role="listbox"></ul>
+      </div>
+      <p class="hint mt-4">Selected: <span id="typeahead-selected" data-testid="text-typeahead-selected">none</span></p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Native <code>&lt;datalist&gt;</code></h2>
+      <p class="module-note">Browser-native autocomplete backed by an <code>&lt;input list&gt;</code> — rendering is handled entirely by the OS/browser, not the page.</p>
+      <div class="field" style="max-width:280px">
+        <label for="datalist-input">Browser</label>
+        <input type="text" id="datalist-input" data-testid="input-datalist" list="browser-options" placeholder="Chrome, Firefox…" />
+        <datalist id="browser-options">
+          <option value="Chromium"></option>
+          <option value="Firefox"></option>
+          <option value="WebKit"></option>
+          <option value="Microsoft Edge"></option>
+        </datalist>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Tag input <span class="badge">multi-value</span></h2>
+      <p class="module-note">Type a value and press <kbd>Enter</kbd> or <kbd>,</kbd> to add a tag; click the × to remove one.</p>
+      <div class="tag-input-box" id="tag-box" data-testid="tag-input-box">
+        <span class="tag-pill" data-testid="tag-pill">playwright <button type="button" data-testid="button-remove-tag" aria-label="Remove playwright">×</button></span>
+        <input type="text" id="tag-input" data-testid="input-tag" placeholder="Add a skill…" />
+      </div>
+      <p class="hint mt-4">Tags: <span id="tag-summary" data-testid="text-tag-summary">playwright</span></p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Date &amp; week pickers</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="range-date">Booking date (weekdays only, next 30 days)</label>
+          <input type="date" id="range-date" data-testid="input-range-date" />
+          <span class="hint" id="range-date-hint"></span>
+        </div>
+        <div class="field">
+          <label for="week-input">ISO week</label>
+          <input type="week" id="week-input" data-testid="input-week" />
+        </div>
+      </div>
+    </section>

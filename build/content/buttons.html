@@ -1,0 +1,83 @@
+    <section class="module">
+      <h2 class="module-title">Basic variants</h2>
+      <p class="module-note">Standard, secondary, ghost, and permanently-disabled buttons.</p>
+      <div class="row">
+        <button class="btn btn-primary" data-testid="button-primary">Primary</button>
+        <button class="btn btn-secondary" data-testid="button-secondary">Secondary</button>
+        <button class="btn btn-ghost" data-testid="button-ghost">Ghost</button>
+        <button class="btn btn-primary" data-testid="button-disabled" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Delayed enable <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">Stays disabled for 3 seconds after page load — wait on the disabled attribute clearing rather than a fixed sleep.</p>
+      <button class="btn btn-primary" id="delayed-btn" data-testid="button-delayed" disabled>Enabling in <span id="delayed-count">3</span>s…</button>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Click to reveal <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">Clicking "Load action" inserts a brand-new button into the DOM after a short delay — practice waiting for an element to appear rather than exist-checking too early.</p>
+      <div class="row">
+        <button class="btn btn-secondary" id="reveal-trigger" data-testid="button-load-action">Load action</button>
+        <span id="reveal-slot"></span>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Click counter &amp; loading state</h2>
+      <div class="row">
+        <button class="btn btn-primary" id="counter-btn" data-testid="button-counter">Clicked <span id="counter-val" data-testid="text-counter-value">0</span> times</button>
+        <button class="btn btn-secondary" id="loading-btn" data-testid="button-loading">Save changes</button>
+      </div>
+      <div class="console mt-4" id="loading-output" data-testid="text-loading-output" aria-live="polite">Idle.</div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Double-click &amp; right-click</h2>
+      <p class="module-note">Native <code>dblclick</code> and <code>contextmenu</code> handlers — Playwright's <code>dblclick()</code> and <code>click({button:'right'})</code> apply here.</p>
+      <div class="row">
+        <button class="btn btn-secondary" id="dblclick-btn" data-testid="button-dblclick">Double-click me</button>
+        <button class="btn btn-secondary" id="rightclick-btn" data-testid="button-rightclick">Right-click me</button>
+      </div>
+      <div class="console mt-4" id="click-output" data-testid="text-click-output" aria-live="polite">No clicks yet.</div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Toggle button <span class="badge">aria-pressed</span></h2>
+      <p class="module-note">A real toggle exposes state via <code>aria-pressed</code>, not just a CSS class.</p>
+      <button class="btn btn-secondary" id="toggle-btn" data-testid="button-toggle" aria-pressed="false" type="button">Notifications: Off</button>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Duplicate labels, scoped by container <span class="badge tone-error">ambiguous locator</span></h2>
+      <p class="module-note">Three cards each have a "Remove" button with identical text and no unique id — a plain text locator matches all three. Scope by the parent card instead.</p>
+      <div class="grid-2" id="card-list">
+        <div class="card" data-testid="card-item" data-item="Alpha widget">
+          <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2)">Alpha widget</h3>
+          <p class="text-muted" style="font-size:var(--text-sm);margin-bottom:var(--space-4)">Qty: 2 · $18.00</p>
+          <button class="btn btn-secondary remove-card-btn" data-testid="button-remove">Remove</button>
+        </div>
+        <div class="card" data-testid="card-item" data-item="Beta widget">
+          <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2)">Beta widget</h3>
+          <p class="text-muted" style="font-size:var(--text-sm);margin-bottom:var(--space-4)">Qty: 1 · $42.00</p>
+          <button class="btn btn-secondary remove-card-btn" data-testid="button-remove">Remove</button>
+        </div>
+        <div class="card" data-testid="card-item" data-item="Gamma widget">
+          <h3 style="font-size:var(--text-base);margin-bottom:var(--space-2)">Gamma widget</h3>
+          <p class="text-muted" style="font-size:var(--text-sm);margin-bottom:var(--space-4)">Qty: 5 · $6.50</p>
+          <button class="btn btn-secondary remove-card-btn" data-testid="button-remove">Remove</button>
+        </div>
+      </div>
+      <p class="hint mt-4" id="card-empty-note" style="display:none">All cards removed — reload the page to reset.</p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Link vs. button semantics</h2>
+      <p class="module-note">Visually identical, but one is an <code>&lt;a&gt;</code> and one is a <code>&lt;button&gt;</code> — <code>getByRole</code> tells them apart even when styling doesn't.</p>
+      <div class="row">
+        <a href="#" class="btn btn-secondary" id="fake-nav-link" data-testid="link-styled-as-button" role="link">Styled as a button (role=link)</a>
+        <button class="btn btn-secondary" data-testid="button-real">Real button (role=button)</button>
+      </div>
+      <div class="console mt-4" id="link-output" data-testid="text-link-output" aria-live="polite"></div>
+    </section>

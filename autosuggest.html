@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Autocomplete & Pickers | QA Playground</title>
+<meta name="description" content="Typeahead search, native datalist, a multi-value tag input, and a date picker." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 10</div>
+      <h1 class="page-title">Autocomplete &amp; pickers</h1>
+      <p class="page-desc">Async-feeling typeahead search with keyboard navigation, the native datalist element, a tag input that builds a list of values, and a native date picker.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Typeahead search <span class="badge tone-warning">async-feeling</span></h2>
+      <p class="module-note">Suggestions are filtered after a simulated 300ms network delay and support full keyboard navigation (<kbd>↑</kbd>/<kbd>↓</kbd> to move, <kbd>Enter</kbd> to select, <kbd>Esc</kbd> to close).</p>
+      <div class="field autosuggest" style="max-width:340px">
+        <label for="typeahead-input">Search a testing tool</label>
+        <input type="text" id="typeahead-input" data-testid="input-typeahead" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="typeahead-list" placeholder="Start typing…" />
+        <ul class="suggest-list" id="typeahead-list" data-testid="list-typeahead" role="listbox"></ul>
+      </div>
+      <p class="hint mt-4">Selected: <span id="typeahead-selected" data-testid="text-typeahead-selected">none</span></p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Native <code>&lt;datalist&gt;</code></h2>
+      <p class="module-note">Browser-native autocomplete backed by an <code>&lt;input list&gt;</code> — rendering is handled entirely by the OS/browser, not the page.</p>
+      <div class="field" style="max-width:280px">
+        <label for="datalist-input">Browser</label>
+        <input type="text" id="datalist-input" data-testid="input-datalist" list="browser-options" placeholder="Chrome, Firefox…" />
+        <datalist id="browser-options">
+          <option value="Chromium"></option>
+          <option value="Firefox"></option>
+          <option value="WebKit"></option>
+          <option value="Microsoft Edge"></option>
+        </datalist>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Tag input <span class="badge">multi-value</span></h2>
+      <p class="module-note">Type a value and press <kbd>Enter</kbd> or <kbd>,</kbd> to add a tag; click the × to remove one.</p>
+      <div class="tag-input-box" id="tag-box" data-testid="tag-input-box">
+        <span class="tag-pill" data-testid="tag-pill">playwright <button type="button" data-testid="button-remove-tag" aria-label="Remove playwright">×</button></span>
+        <input type="text" id="tag-input" data-testid="input-tag" placeholder="Add a skill…" />
+      </div>
+      <p class="hint mt-4">Tags: <span id="tag-summary" data-testid="text-tag-summary">playwright</span></p>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Date &amp; week pickers</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="range-date">Booking date (weekdays only, next 30 days)</label>
+          <input type="date" id="range-date" data-testid="input-range-date" />
+          <span class="hint" id="range-date-hint"></span>
+        </div>
+        <div class="field">
+          <label for="week-input">ISO week</label>
+          <input type="week" id="week-input" data-testid="input-week" />
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/autosuggest.js"></script>
+</body>
+</html>

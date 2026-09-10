@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Frames & iFrames | QA Playground</title>
+<meta name="description" content="Single iframe, nested iframes, and a lazily-loaded iframe for frame-switching practice." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e7c5f'/><path d='M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-controls="sidebar" data-testid="sidebar-toggle">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  Menu
+</button>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" data-sidebar>
+<a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity="0.12"/>
+        <path d="M10 9 L5.5 16 L10 23 M22 9 L26.5 16 L22 23 M12.5 16.5 L15 19 L20 12.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand-name">QA<span class="dim">.playground</span></span>
+    </a>
+
+    <nav aria-label="Practice modules">
+      <div class="nav-group-label">Modules</div>
+      <ul class="nav-list" role="list">
+        <li><a class="nav-link" href="index.html"><span class="num">00</span>Overview</a></li>
+        <li><a class="nav-link" href="forms.html"><span class="num">01</span>Forms &amp; Inputs</a></li>
+        <li><a class="nav-link" href="buttons.html"><span class="num">02</span>Buttons &amp; Actions</a></li>
+        <li><a class="nav-link" href="tables.html"><span class="num">03</span>Tables</a></li>
+        <li><a class="nav-link" href="frames.html"><span class="num">04</span>Frames &amp; iFrames</a></li>
+        <li><a class="nav-link" href="dialogs.html"><span class="num">05</span>Dialogs &amp; Modals</a></li>
+        <li><a class="nav-link" href="dynamic.html"><span class="num">06</span>Dynamic Content</a></li>
+        <li><a class="nav-link" href="dragdrop.html"><span class="num">07</span>Drag, Drop &amp; Upload</a></li>
+        <li><a class="nav-link" href="windows.html"><span class="num">08</span>Windows &amp; Tabs</a></li>
+        <li><a class="nav-link" href="locators.html"><span class="num">09</span>Tricky Locators</a></li>
+        <li><a class="nav-link" href="autosuggest.html"><span class="num">10</span>Autocomplete &amp; Pickers</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="text-muted" style="font-size:var(--text-xs)">v1.0 · local-first</span>
+      <button class="theme-toggle" data-theme-toggle data-testid="theme-toggle" type="button"></button>
+    </div>
+
+  </aside>
+
+  <main class="main" id="main">
+    <header class="page-header">
+      <div class="page-kicker">qa.playground / 04</div>
+      <h1 class="page-title">Frames &amp; iframes</h1>
+      <p class="page-desc">Interacting with elements inside a frame requires switching context first. This page has a same-origin iframe, a nested iframe-in-an-iframe, and a frame that only loads after a delay.</p>
+    </header>
+
+    <section class="module">
+      <h2 class="module-title">Same-origin iframe <span class="badge tone-success">stable</span></h2>
+      <p class="module-note">Switch into the frame's content document before interacting with its form.</p>
+      <iframe class="iframe-frame" src="frame-inner.html" data-testid="iframe-basic" title="Basic same-origin frame"></iframe>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Nested iframe (two levels deep)</h2>
+      <p class="module-note">An iframe inside an iframe — you need to descend twice to reach the innermost button.</p>
+      <iframe class="iframe-frame" src="frame-nested-outer.html" data-testid="iframe-outer" title="Outer frame with nested frame inside"></iframe>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Lazily-loaded frame <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">No iframe exists in the DOM until you click the button — wait for the frame to attach, then wait for it to finish loading.</p>
+      <button class="btn btn-secondary" id="load-frame-btn" data-testid="button-load-frame">Load frame</button>
+      <div id="lazy-frame-slot" class="mt-4"></div>
+    </section>
+
+    <script>
+      document.getElementById('load-frame-btn').addEventListener('click', function () {
+        var slot = document.getElementById('lazy-frame-slot');
+        if (slot.querySelector('iframe')) return;
+        var f = document.createElement('iframe');
+        f.className = 'iframe-frame';
+        f.style.height = '90px';
+        f.src = 'frame-lazy.html';
+        f.setAttribute('data-testid', 'iframe-lazy');
+        f.setAttribute('title', 'Lazily loaded frame');
+        slot.appendChild(f);
+      });
+    </script>
+
+
+    <footer class="site-footer">Built for practicing Playwright, Selenium, and Robot Framework locators.</footer>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

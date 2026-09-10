@@ -1,0 +1,82 @@
+{
+  "forms": {
+    "title": "Forms & Inputs | QA Playground",
+    "desc": "Text fields, textarea, radio, checkbox, and select edge cases for automation practice.",
+    "kicker": "01",
+    "h1": "Forms &amp; inputs",
+    "page_desc": "Text inputs, textareas, radio groups, checkboxes, and selects — including validation, disabled and readonly states, indeterminate checkboxes, and multi-select. Submitting shows exactly what the form collected.",
+    "scripts": ["forms"]
+  },
+  "buttons": {
+    "title": "Buttons & Actions | QA Playground",
+    "desc": "Enabled, disabled, delayed, and duplicate-label buttons plus click, double-click, right-click, and hover interactions.",
+    "kicker": "02",
+    "h1": "Buttons &amp; actions",
+    "page_desc": "Every flavor of clickable control: a button that stays disabled until a condition is met, one that only appears after a delay, duplicate-label buttons that need scoped locators, and click/double-click/right-click/hover handlers.",
+    "scripts": ["buttons"]
+  },
+  "tables": {
+    "title": "Tables | QA Playground",
+    "desc": "Static, sortable, filterable, paginated, and dynamically-editable tables.",
+    "kicker": "03",
+    "h1": "Tables",
+    "page_desc": "A static reference table, a sortable/filterable dataset, a table you can add and remove rows from, and pagination — the four shapes of table you'll meet in real products.",
+    "scripts": ["tables"]
+  },
+  "frames": {
+    "title": "Frames & iFrames | QA Playground",
+    "desc": "Single iframe, nested iframes, and a lazily-loaded iframe for frame-switching practice.",
+    "kicker": "04",
+    "h1": "Frames &amp; iframes",
+    "page_desc": "Interacting with elements inside a frame requires switching context first. This page has a same-origin iframe, a nested iframe-in-an-iframe, and a frame that only loads after a delay.",
+    "scripts": []
+  },
+  "dialogs": {
+    "title": "Dialogs & Modals | QA Playground",
+    "desc": "Native alert, confirm and prompt dialogs, a custom modal with focus trap, a tooltip, and a toast.",
+    "kicker": "05",
+    "h1": "Dialogs &amp; modals",
+    "page_desc": "Native browser dialogs (alert/confirm/prompt) need dialog-event handling rather than DOM locators. This page also has an in-page modal with a focus trap, a hover tooltip, and a toast notification.",
+    "scripts": ["dialogs"]
+  },
+  "dynamic": {
+    "title": "Dynamic Content | QA Playground",
+    "desc": "Delayed rendering, polling counters, moving targets, disappearing elements, and covered elements.",
+    "kicker": "06",
+    "h1": "Dynamic content",
+    "page_desc": "Timing is where automation breaks. Elements here appear late, move around, get replaced with fresh DOM nodes, or start out covered by an overlay — practice waiting on the right condition instead of a fixed sleep.",
+    "scripts": ["dynamic"]
+  },
+  "dragdrop": {
+    "title": "Drag, Drop & Upload | QA Playground",
+    "desc": "HTML5 drag-and-drop reordering, cross-list drag, sliders, file upload, and file download.",
+    "kicker": "07",
+    "h1": "Drag, drop &amp; upload",
+    "page_desc": "Native HTML5 drag-and-drop for reordering and moving items between lists, a range slider, a file input with drag-and-drop upload, and a generated file download.",
+    "scripts": ["dragdrop"]
+  },
+  "windows": {
+    "title": "Windows & Tabs | QA Playground",
+    "desc": "Links that open a new tab, a popup window, and window.opener messaging.",
+    "kicker": "08",
+    "h1": "Windows &amp; tabs",
+    "page_desc": "Multi-window flows need explicit context switching in automation. This page opens a new tab, opens a popup window, and receives a message back from the child window.",
+    "scripts": ["windows"]
+  },
+  "locators": {
+    "title": "Tricky Locators | QA Playground",
+    "desc": "Duplicate ids, hidden twins, dynamically-changing ids and classes, and a shadow DOM component.",
+    "kicker": "09",
+    "h1": "Tricky locators",
+    "page_desc": "Markup you'll actually meet in the wild: duplicate ids and classes, a visible/hidden pair with identical text, ids and classes that regenerate on every render, and a real shadow DOM component that normal CSS selectors can't pierce.",
+    "scripts": ["locators"]
+  },
+  "autosuggest": {
+    "title": "Autocomplete & Pickers | QA Playground",
+    "desc": "Typeahead search, native datalist, a multi-value tag input, and a date picker.",
+    "kicker": "10",
+    "h1": "Autocomplete &amp; pickers",
+    "page_desc": "Async-feeling typeahead search with keyboard navigation, the native datalist element, a tag input that builds a list of values, and a native date picker.",
+    "scripts": ["autosuggest"]
+  }
+}

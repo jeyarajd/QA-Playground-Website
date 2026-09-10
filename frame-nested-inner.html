@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Innermost frame</title>
+<style>
+  body{font-family:'General Sans','Inter',sans-serif;margin:0;padding:16px;background:#eef2ed;color:#14201a;}
+  p{font-size:13px;margin-bottom:10px;}
+  button{background:#0e7c5f;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:14px;cursor:pointer;}
+  #count{font-weight:700;}
+</style>
+</head>
+<body>
+  <p>This is the innermost frame — two levels deep.</p>
+  <button id="ping-btn" data-testid="button-nested-ping" type="button">Ping (<span id="count">0</span>)</button>
+  <script>
+    var n = 0;
+    document.getElementById('ping-btn').addEventListener('click', function () {
+      n += 1;
+      document.getElementById('count').textContent = n;
+    });
+  </script>
+</body>
+</html>

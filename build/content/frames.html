@@ -1,0 +1,32 @@
+    <section class="module">
+      <h2 class="module-title">Same-origin iframe <span class="badge tone-success">stable</span></h2>
+      <p class="module-note">Switch into the frame's content document before interacting with its form.</p>
+      <iframe class="iframe-frame" src="frame-inner.html" data-testid="iframe-basic" title="Basic same-origin frame"></iframe>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Nested iframe (two levels deep)</h2>
+      <p class="module-note">An iframe inside an iframe — you need to descend twice to reach the innermost button.</p>
+      <iframe class="iframe-frame" src="frame-nested-outer.html" data-testid="iframe-outer" title="Outer frame with nested frame inside"></iframe>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Lazily-loaded frame <span class="badge tone-warning">timing-sensitive</span></h2>
+      <p class="module-note">No iframe exists in the DOM until you click the button — wait for the frame to attach, then wait for it to finish loading.</p>
+      <button class="btn btn-secondary" id="load-frame-btn" data-testid="button-load-frame">Load frame</button>
+      <div id="lazy-frame-slot" class="mt-4"></div>
+    </section>
+
+    <script>
+      document.getElementById('load-frame-btn').addEventListener('click', function () {
+        var slot = document.getElementById('lazy-frame-slot');
+        if (slot.querySelector('iframe')) return;
+        var f = document.createElement('iframe');
+        f.className = 'iframe-frame';
+        f.style.height = '90px';
+        f.src = 'frame-lazy.html';
+        f.setAttribute('data-testid', 'iframe-lazy');
+        f.setAttribute('title', 'Lazily loaded frame');
+        slot.appendChild(f);
+      });
+    </script>

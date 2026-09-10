@@ -1,0 +1,17 @@
+    <section class="module">
+      <h2 class="module-title">Open a new tab</h2>
+      <p class="module-note">Standard <code>target="_blank"</code> link — expect a new page/context in your automation tool.</p>
+      <a class="btn btn-secondary" href="new-tab.html" target="_blank" rel="noopener" data-testid="link-new-tab">Open in new tab</a>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Open a popup window</h2>
+      <p class="module-note">Opens via <code>window.open()</code> with fixed dimensions — a distinct window, not just a tab.</p>
+      <button class="btn btn-secondary" id="open-popup-btn" data-testid="button-open-popup">Open popup</button>
+    </section>
+
+    <section class="module">
+      <h2 class="module-title">Receiving a message back</h2>
+      <p class="module-note">The popup posts a message to this page via <code>window.opener.postMessage</code> before closing itself.</p>
+      <div class="console" id="popup-message-output" data-testid="text-popup-message" aria-live="polite">No message received yet.</div>
+    </section>
