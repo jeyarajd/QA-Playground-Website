@@ -106,7 +106,7 @@ below are attribute selectors, e.g. `[data-testid="button-submit-form"]`.
 | DY5 | Vanishing banner | (banner shown via `button-show-vanishing`) | Banner appears immediately, then disappears after 3s on its own |
 | DY6 | Progress bar completion | `button-start-progress`, `progress-fill`, `progress-track`, `text-progress-label` | Starts at 0, animates to 100%, label updates to a "done" state — assert final state with a wait, not immediately after click |
 | DY7 | Moving target eventually clickable | `button-show-moving`, `button-moving-target` | Element moves for a period then settles; a click attempt should wait for it to stop and become actionable, not click mid-animation |
-| DY8 | Infinite scroll loads more rows | `infinite-scroll-box` | Starts with 10 rows; scrolling to the bottom loads 10 more (up to 20 total); assert row count before and after scroll |
+| DY8 | Infinite scroll loads more rows | `infinite-scroll-box` | Starts with 10 rows; scrolling to the bottom loads 10 more at a time (up to 50 total); assert row count before and after scroll |
 
 ---
 
